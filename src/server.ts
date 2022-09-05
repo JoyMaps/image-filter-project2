@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import {Router, Request, Response } from 'express';
+import {Request,Response } from 'express';
 import {filterImageFromURL, deleteLocalFiles} from './util/util';
 
 (async () => {
@@ -8,6 +8,9 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   // Init the Express application
   const app = express();
 
+  app.get('/', (request, response) => {
+    response.send('response for GET request');
+  });
   // Set the network port
   const port = process.env.PORT || 8082;
   
@@ -30,7 +33,7 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
 
   /**************************************************************************** */
 app.get("/filteredimage", async ( req, res ) =>{
-const image_url = req.query.image_url.toString();
+const image_url:string = req.query.image_url.toString();
 if (!image_url){
   res.status(404).send('Please enter valid url');
 }
